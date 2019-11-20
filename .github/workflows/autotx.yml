@@ -1,4 +1,4 @@
-ame: Auto Execution
+name: Auto Execution
 
 on: [push]
 jobs:  
