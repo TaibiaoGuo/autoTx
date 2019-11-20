@@ -1,0 +1,16 @@
+{
+  "name": "autotx",
+  "version": "1.0.0",
+  "description": "Ethereum Auto Transaction Scripts",
+  "main": "autotx.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "TaibiaoGuo",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.6.2",
+    "log4js": "^4.0.2",
+    "web3": "1.2.4"
+  }
+}
