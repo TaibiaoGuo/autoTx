@@ -9,6 +9,7 @@ jobs:
     - name: Building the Docker image
       run: docker build -t autotx:latest .
     - name: Get keys
+      uses: ./
       with:
         YOUR_PUBLIC_KEY: ${{ secrets.PK }}
         YOUR_HTTP_RPC_URL: ${{ secrets.GITHUB_TOKEN }}
