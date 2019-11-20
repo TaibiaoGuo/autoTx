@@ -10,4 +10,4 @@ jobs:
       run: docker build -t autotx:latest .
         
     - name:  Running the autoTx Script
-      run: docker run --name="my-autotx" -d -e PK=${{ secrets.PK }} -e HRPC=${{ secrets.GITHUB_TOKEN }} autotx
+      run: docker run --name="my-autotx" -e PK=${{ secrets.PK }} -e HRPC=${{ secrets.GITHUB_TOKEN }} autotx
