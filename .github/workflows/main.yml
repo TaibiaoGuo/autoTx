@@ -1,0 +1,16 @@
+name: Auto Execution
+
+on: [push]
+
+jobs:
+  
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Building the Docker image
+      run: 
+        docker build -t autotx:latest .
+        
+    - name:  Running the autoTx Script
+        docker run --name="my-autotx" -d -e PK=${{ secrets.PK }} -e HRPC=${{ secrets.GITHUB_TOKEN }} autotx
