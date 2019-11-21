@@ -10,7 +10,4 @@ jobs:
       run: docker build -t autotx:latest .
       
     - name: Running the autoTx Script
-      env: 
-       YOUR_PUBLIC_KEY: ${{secrets.PK}}
-       YOUR_HTTP_RPC_URL: ${{ secrets.GITHUB_TOKEN }}
-      run: docker run --name="my-autotx" -e PK=$YOUR_PUBLIC_KEY -e HRPC=$YOUR_HTTP_RPC_URL autotx:latest
+      run: docker run --name="my-autotx" -e PK=${{secrets.PK}} -e HRPC=${{ secrets.HRPC }} autotx:latest
