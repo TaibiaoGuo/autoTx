@@ -13,7 +13,14 @@ docker build -t autotx:latest .
 > `docker build -t autotx:latest -f DockerfileCN .`
 
 # RUN
-You need to input your ethereum private key and your HTTP RPC URL by `-e` option when running this docker image.
+You need to input your ethereum private key and your HTTP RPC URL by `-e` option when running this docker image. For each run, 4 transctions would be create. 
+
 ```bash
-docker run --name="my-autotx" -d -e PK="YOUR_PRIVATE_KEY" -e HRPC="YOUR_HTTP_RPC_URL" autotx
+docker run --name="my-autotx" -d -e PK="YOUR_PRIVATE_KEY" -e HRPC="YOUR_HTTP_RPC_URL" autotx:latest
+```
+
+If you need to keep trading, Please use the command as following:
+
+```bash
+docker run --name="my-autotx" -d -e PK="YOUR_PRIVATE_KEY" -e HRPC="YOUR_HTTP_RPC_URL"  --restart=always autotx:latest
 ```
