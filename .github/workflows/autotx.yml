@@ -8,10 +8,6 @@ jobs:
     - uses: actions/checkout@v1
     - name: Building the Docker image
       run: docker build -t autotx:latest .
-    - name: Get keys
-      uses: ./
-      with:
-        YOUR_PUBLIC_KEY: ${{ secrets.PK }}
-        YOUR_HTTP_RPC_URL: ${{ secrets.GITHUB_TOKEN }}
+      
     - name: Running the autoTx Script
-      run: docker run --name="my-autotx" -e PK=$YOUR_PUBLIC_KEY -e HRPC=$YOUR_HTTP_RPC_URL autotx
+      run: docker run --name="my-autotx" -e PK=${{secrets.PK}} -e HRPC=${{ secrets.HRPC }} autotx:latest
