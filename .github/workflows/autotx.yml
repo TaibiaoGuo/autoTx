@@ -1,6 +1,10 @@
 name: Auto Execution
 
-on: [push]
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 10 * * *'
+
 jobs:  
   build:
     runs-on: ubuntu-latest
@@ -11,3 +15,29 @@ jobs:
       
     - name: Running the autoTx Script
       run: docker run --name="my-autotx" -e PK=${{secrets.PK}} -e HRPC=${{ secrets.HRPC }} autotx:latest
+
+    - name: Send dingding notify  
+      if: failure()
+      uses: GavinHome/action-dingding@v1.0
+      with:
+       token: ${{ secrets.DING_TOKEN }}
+       body: |
+         {
+          "actionCard": {
+          "title": "狗蛋险情汇报",
+          "text": "报！！！俺巡逻时发现区块链信息浏览器自动交易程序崩溃啦！真不是我干的，请大人们明察秋毫！",
+          "hideAvatar": "0",
+          "btnOrientation": "1",
+          "btns": [
+                {
+                      "title": "查日志",
+                      "actionURL": "https://github.com/${{ github.repository }}/${{ github.sha }}/checks"
+                  },
+                {
+                      "title": "看险情",
+                      "actionURL": "http://218.76.42.96:30313/"
+                  }
+            ]
+         },
+          "msgtype": "actionCard"
+         }
