@@ -8,7 +8,7 @@ if(pk == null || hrpc ==null){
 logger.warn("args ERROR");
 }
 //Tx Count
-let txLimit = 1；
+let txLimit;
 if(process.env.CORN == "TRUE"){txLimit = randomInt(50,100);} else {txLimit = 4;}
 let txCount = 0;
 
