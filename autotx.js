@@ -1,35 +1,40 @@
 const Web3 = require('web3');
-var log4js = require('log4js');
-var logger = log4js.getLogger();
-logger.level = "info"
-var pk = process.env.PK
-var hrpc = process.env.HRPC
+const log4js = require('log4js');
+const logger = log4js.getLogger();
+logger.level = "info";
+const pk = process.env.PK;
+const hrpc = process.env.HRPC;
 if(pk == null || hrpc ==null){
 logger.warn("args ERROR");
-} 
-//var web3 = new Web3('http://172.20.46.123:8545');
-var web3 = new Web3(hrpc);
+}
+
+//Tx Count
+
+const txLimit = randomInt(50,100);
+let txCount = 0;
+
+let web3 = new Web3(hrpc);
 
 // Create an account using a private key
-var privateKey = pk;
-var account = web3.eth.accounts.privateKeyToAccount(privateKey);
-console.log(account)
+const privateKey = pk;
+const account = web3.eth.accounts.privateKeyToAccount(privateKey);
+console.log(account);
 // Output address balance
 web3.eth.getBalance(account.address).then(v=>{logger.info('address ' + account.address + ' balance:' + web3.utils.fromWei(v));});
 
-var targetAddresses = [
+const targetAddresses = [
     '0xcEb8D8E1708B490AF87FE440a28b4A334D292c5E',
     '0x0B46aF314B57CA5Da5B9Dc893b90b1b05FaEC9eE',
     '0xe705529709232778f587504d12C4cfD028ac9E02',
 ];
-var currentIdx = 0;
+let currentIdx = 0;
 
 logger.info('execute transactions...');
 transferFunds();
 
 function transferFunds(){
     // Transaction details
-    var txObj = {
+    let txObj = {
          "chainId": 1515,
          "from": account.address,
          "to": targetAddresses[currentIdx],
@@ -62,10 +67,16 @@ function queryTransactionReceipt(hash){
             currentIdx++;
             if (currentIdx >= targetAddresses.length){currentIdx = 0;}
             logger.info("Sleeping");
-            setTimeout(transferFunds, 1000 * 14 * Math.ceil(Math.random()*10));
+            txCount++;
+            if (txCount >= txLimit){process.exit(0);}
+            setTimeout(transferFunds, 1000 * randomInt(3,7));
         }else{
             setTimeout(function(hash){return function(){queryTransactionReceipt(hash);}}(hash), 1000);
         }        
     });
     
+}
+
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
 }
