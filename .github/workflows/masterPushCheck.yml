@@ -18,7 +18,7 @@ jobs:
           ${{ runner.OS }}-build-
           ${{ runner.OS }}-
     - name: Building the Docker image
-      run: docker build -t autotx:latest .
+      run: docker build -t autotx:latest -f DockerfileGithub .
       
     - name: Running the autoTx Script
       run: docker run --name="my-autotx" -e PK=${{secrets.PK}} -e HRPC=${{ secrets.HRPC }} autotx:latest
