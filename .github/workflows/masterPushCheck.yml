@@ -1,0 +1,15 @@
+name: master building
+on:
+  push:
+    branches: 
+      - master
+jobs:  
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Building the Docker image
+      run: docker build -t autotx:latest .
+      
+    - name: Running the autoTx Script
+      run: docker run --name="my-autotx" -e PK=${{secrets.PK}} -e HRPC=${{ secrets.HRPC }} autotx:latest
