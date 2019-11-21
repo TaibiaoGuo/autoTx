@@ -14,9 +14,7 @@ jobs:
       run: docker build -t autotx:latest .
       
     - name: Running the autoTx Script
-      env: 
-        CORN: "TRUE"  
-      run: docker run --name="my-autotx" -e PK=${{secrets.PK}} -e HRPC=${{ secrets.HRPC }} autotx:latest
+      run: docker run --name="my-autotx" -e PK=${{secrets.PK}} -e HRPC=${{ secrets.HRPC }} -e CORN="TRUE" autotx:latest
 
     - name: Send dingding notify  
       if: failure()
