@@ -8,6 +8,10 @@ Let your transactions browser display some randomly transactions by this autoTx 
 docker build -t autotx:latest .
 ```
 
+> TIPS: If  in China, use the following command to speed up building:
+>
+> `docker build -t autotx:latest -f DockerfileCN .`
+
 # RUN
 You need to input your ethereum private key and your HTTP RPC URL by `-e` option when running this docker image.
 ```bash
