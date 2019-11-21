@@ -7,10 +7,8 @@ const hrpc = process.env.HRPC;
 if(pk == null || hrpc ==null){
 logger.warn("args ERROR");
 }
-
 //Tx Count
-
-const txLimit = randomInt(50,100);
+if(process.env.CORN == "TRUE"){const txLimit = randomInt(50,100);} else {const txLimit = 4;}
 let txCount = 0;
 
 let web3 = new Web3(hrpc);
@@ -18,7 +16,7 @@ let web3 = new Web3(hrpc);
 // Create an account using a private key
 const privateKey = pk;
 const account = web3.eth.accounts.privateKeyToAccount(privateKey);
-console.log(account);
+// console.log(account);
 // Output address balance
 web3.eth.getBalance(account.address).then(v=>{logger.info('address ' + account.address + ' balance:' + web3.utils.fromWei(v));});
 
