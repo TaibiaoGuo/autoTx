@@ -8,7 +8,8 @@ if(pk == null || hrpc ==null){
 logger.warn("args ERROR");
 }
 //Tx Count
-if(process.env.CORN == "TRUE"){const txLimit = randomInt(50,100);} else {const txLimit = 4;}
+let txLimit = 1；
+if(process.env.CORN == "TRUE"){txLimit = randomInt(50,100);} else {txLimit = 4;}
 let txCount = 0;
 
 let web3 = new Web3(hrpc);
