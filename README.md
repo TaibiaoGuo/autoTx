@@ -8,7 +8,7 @@ Let your transactions browser display some randomly transactions by this autoTx 
 docker build -t autotx:latest .
 ```
 
-> TIPS: If  in China, use the following command to speed up building:
+> TIPS: Useing the following command to speed up building **in China** :
 >
 > `docker build -t autotx:latest -f DockerfileCN .`
 
