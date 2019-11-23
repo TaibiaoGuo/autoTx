@@ -2,6 +2,7 @@ name: unmaster building
 on:
   push:
     branches: 
+      - "**"
       - "!master"
 jobs:  
   build:
