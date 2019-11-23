@@ -23,4 +23,4 @@ jobs:
     - name: Running the autoTx Script
       run: |
        docker run --name="my-autotx" -e PK=${{secrets.PK}} -e HRPC=${{ secrets.HRPC }} autotx:latest
-       docker cp  my-autotx:/app/node_modules $GITHUB_WORKSPACE/
+       docker cp my-autotx:/app/node_modules $GITHUB_WORKSPACE/
