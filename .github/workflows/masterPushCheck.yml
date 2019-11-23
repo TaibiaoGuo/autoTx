@@ -8,19 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Cache node modules
-      uses: actions/cache@v1
-      with:
-        path: node_modules
-        key: ${{ runner.OS }}-build-${{ hashFiles('**/package.json') }}
-        restore-keys: |
-          ${{ runner.OS }}-build-${{ env.cache-name }}-
-          ${{ runner.OS }}-build-
-          ${{ runner.OS }}-
+   
     - name: Building the Docker image
       run: docker build -t autotx:latest -f DockerfileGithub .
       
     - name: Running the autoTx Script
       run: |
        docker run --name="my-autotx" -e PK=${{secrets.PK}} -e HRPC=${{ secrets.HRPC }} autotx:latest
-       docker cp  my-autotx:/app/node_modules $GITHUB_WORKSPACE/
