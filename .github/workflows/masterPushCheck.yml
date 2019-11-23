@@ -21,4 +21,6 @@ jobs:
       run: docker build -t autotx:latest -f DockerfileGithub .
       
     - name: Running the autoTx Script
-      run: docker run --name="my-autotx" -e PK=${{secrets.PK}} -e HRPC=${{ secrets.HRPC }} autotx:latest
+      run: |
+       docker run --name="my-autotx" -e PK=${{secrets.PK}} -e HRPC=${{ secrets.HRPC }} autotx:latest
+       docker cp  my-autotx:/app/node_modules {{ $GITHUB_WORKSPACE }}
